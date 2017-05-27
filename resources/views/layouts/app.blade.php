@@ -90,7 +90,7 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="/">
                         <span>                        
-                            <img class="logo" src="/img-uploads/gojammitLogo.png" /> 
+                            <img class="" src="/img-uploads/gojammitLogo.png" /> 
                             <p>GOJamIt!</p>
                         </span>
                     </a>
@@ -156,41 +156,6 @@
 
         @yield('content')
     </div>
-
-     <!-- Notifs Modal -->
-      <!--   <div class="modal fade" id="notifsModal" role="dialog">
-            <div class="modal-dialog"> -->
-                <!-- Modal content-->
-                <!-- <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Notifications</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        @forelse(Auth::user()->notifications as $notification)
-                            <div>
-                                @if($notification->type == "1")
-                                    <a>{{$notification->notifier_id}}</a> has followed you;
-                                @elseif($notification->type == "2")
-                                    {{$notification->id}} has liked your post;
-                                @else
-                                    {{$notification->id}} has commented on your post;
-                                @endif
-                            </div>
-                            @empty
-                                <p>Oh no! Nobody is following you.</p> 
-                        @endforelse
-                    </div>
-                    <div class="modal-footer">
-                        <p> </p>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div> -->
-<!-- 
-            </div>
-        </div> -->
-        <!--  END OF MODAL -->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
