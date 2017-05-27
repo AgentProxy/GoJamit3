@@ -31,17 +31,17 @@ console.log("hello");
                      {{ csrf_field() }}
                      {{ method_field('POST') }}
                      <div class="form-group">
-                        <input id="age_slider" class="form-control" type="range" min="16" max = "100" step="1"/>
-                        <span id="age"> </span> Years Old
-                        <input id="distance_slider" class="form-control" type="range" min="0" max="100" step="1"/>
-                        <span id="distance"> </span> KM
+                        <input id="age_slider" name="age_slider" class="form-control" type="range" value="16" min="16" max = "100" step="1"/>
+                        16<span id="age"></span> Years Old
+                        <input id="distance_slider" name="distance_slider" class="form-control" type="range" value="0" min="0" max="100" step="1"/>
+                        <span id="distance">0</span> KM
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label">Sex</label>
                         <label for="male" class="radio-inline"><input id="male" type="radio" name="sex" value="M">Male</label>
                         <label for="female" class="radio-inline"><input id="female" type="radio" name="sex" value="F">Female</label>
                     </div>
-                     <div class="form-group">
+                    <!--  <div class="form-group">
                         <label class="col-md-4 control-label">Genres Listened </label>
 
                         <div class="col-md-6 checkbox">
@@ -72,7 +72,7 @@ console.log("hello");
                             <label for="saxophone"><input name="instruments[]" id="saxophone" type="checkbox" value="5">Saxophone</label>
                         </div>
                     </div>
-
+ -->
                         <input type="text" id="longitude" name="longitude" value="2.0" hidden/>
                         <input type="text" id="latitude" name="latitude" value="2.0" hidden/>
                         <button type="submit" class="btn btn-success"> Search </button>

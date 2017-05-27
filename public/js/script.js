@@ -12,17 +12,13 @@ $(document).ready(function(){
 
 function displayRange(){
 	age = document.getElementById("age_slider").value;
-	document.getElementById("age").innerHTML=age;
+	document.getElementById("age").innerHTML=" - " + age;
+	if(age=='16'){
+		document.getElementById("age").innerHTML="";
+	}
 	distance = document.getElementById("distance_slider").value;
 	document.getElementById("distance").innerHTML=distance;
 }
-
-
-// function displayDistance(){
-// 	distance = document.getElementById("distance_slider").value;
-// 	document.getElementById("distance").innerHTML=distance;
-// }
-
 
 function likePost(){
 	var post_id = $(this).attr("data-pg");
@@ -129,19 +125,12 @@ function deletePost(){
 }
 
 function audioPlay(post_id){
-	//var post_id = $(this).attr("data-pg");
-	console.log("hey");
-	console.log(post_id);
-
-	// /var post_id = $(this).attr("data-pg");
 
 	$.ajax({
 		url: "/post/play/"+post_id,
 		type: "get",
 		success:function(data){
-			 console.log("Data: " + data);
 			 $("#plays-"+post_id).html(data + " plays <span id='plays-{{$post->id}}' class='glyphicon glyphicon-repeat'></span> ");
-			 console.log(data);
 		}
 	});
 }

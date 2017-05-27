@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use App\Genre;
+use Illuminate\Support\Facades\Input;
 
 class DiscoverController extends Controller
 {
@@ -18,74 +19,61 @@ class DiscoverController extends Controller
     }
 
     public function discover(Request $request){
-        $user = User::findOrFail(Auth::user()->id);
-
-        //$user->update(number_format($request->input('latitude'),8,'.',''));
-        $user['latitude'] = (number_format($request->latitude,8,'.',''));
-        $user['longitude'] = (number_format($request->longitude,8,'.',''));
-        $user->update();
-
-        function distance($lat1, $lon1, $lat2, $lon2, $unit) {
-
-            $theta = $lon1 - $lon2;
-            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $miles = $dist * 60 * 1.1515;
-            $unit = strtoupper($unit);
-
-            if ($unit == "K") {
-                return ($miles * 1.609344);
-            } 
-            else if ($unit == "N") {
-                return ($miles * 0.8684);
-            } 
-            else {
-                return $miles;
-            }
-        }
+      $user = User::findOrFail(Auth::user()->id);
+      $user['latitude'] = (number_format($request->latitude,8,'.',''));
+      $user['longitude'] = (number_format($request->longitude,8,'.',''));
+      $user->update();
 
 
-        $following_ids = array();
-        foreach($user->following as $following_user){
-               $following_ids[] = array(
-                'id'=>$following_user->following->id,
-             );
-        }
+      $age = $request->age_slider;
+      $distance = $request->distance;
+      $sex = $request->sex;
 
-       $follow_users = User::select()->whereNotIn('id',$following_ids)->get();  
-       $jammers = array();
+      $following_ids = array();
+      foreach($user->following as $following_user){
+             $following_ids[] = array(
+              'id'=>$following_user->following->id,
+           );
+      }
+
+      $follow_users = User::select()->whereNotIn('id',$following_ids)->Where('id','!=',Auth::user()->id)->get();  
+      $jammers = array();
+
+    /*
+    Description: Distance calculation from the latitude/longitude of 2 points
+    Author: Rajesh Singh (2014)
+    Website: http://AssemblySys.com
+     
+    If you find this script useful, you can show your
+    appreciation by getting Rajesh a cup of coffee ;)
+    PayPal: rajesh.singh@assemblysys.com
+     
+    As long as this notice (including author name and details) is included and
+    UNALTERED, this code is licensed under the GNU General Public License version 3:
+    http://www.gnu.org/licenses/gpl.html
+    */
+     
+    function distanceCalculation($point1_lat, $point1_long, $point2_lat, $point2_long, $decimals = 2) {
+      // Calculate the distance in degrees
+      $degrees = rad2deg(acos((sin(deg2rad($point1_lat))*sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat))*cos(deg2rad($point2_lat))*cos(deg2rad($point1_long-$point2_long)))));
+     
+      // Convert the distance in degrees to the chosen unit (kilometres, miles or nautical miles)
+
+        $distance = $degrees * 111.13384; // 1 degree = 111.13384 km, based on the average diameter of the Earth (12,735 km)
+         
+      return round($distance, $decimals);
+    }
        
-       foreach ($follow_users as $follow_user) {
-           if($follow_user->age == 0){
-                 echo $follow_user->fname;
-                $jammers[] = $follow_user;
-                // if($follow_user)
-                // foreach ($follow_user->genres as $genre) {
-                        $genres = $follow_user->genres;
-                        foreach($genres as $genre){
-                            //echo $genre->genre;
-                        }
-                // }
-           }
-       }
+    foreach ($follow_users as $follow_user) {
+      if(($follow_user->age <= $age && $follow_user->age >= '16')&&($follow_user->sex == $sex)){
+        echo distanceCalculation($user['latitude'],$user['longitude'],$follow_user->latitude,$follow_user->longitude, $decimals = 2);
 
-       //$genres = Genre::all();
-       // Genre::select()->whereNotIn('id',$following_ids)->where('user_id',$user->id)->get();
-
-       // foreach($genres as $genre){
-       //      echo $genre->user;
-       //      echo "<\br>";
-       // }
-       //return $genres->user;
-       // foreach($jammers as $jammer){
-       //      echo $jammer->genres;
-       // }
-
-      // return $jammers->genres->get();
-
-        //return view("discover.jammers", compact('follow_users'));
-
+        if(distanceCalculation($user['latitude'],$user['longitude'],$follow_user->latitude,$follow_user->longitude, $decimals = 2)<=$distance){
+          $jammers[] = $follow_user;
+        }
+      }
+    }
+       return view('discover.jammers', compact('jammers'));
     }
 
 }

@@ -2,7 +2,7 @@
 
 
 @section('content')
-@forelse($follow_users as $user)
+@forelse($jammers as $user)
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default" >
             <div class="panel-heading">
@@ -12,6 +12,13 @@
                 <div>
                       {{ $user->username }}
                 </div>
+                <a class="post-prof-pic pull-left" href="#" >
+                       @if($user->prof_pic == null)
+                      <img src="/img-uploads/maleDefault.png"/>
+                      @else
+                      <img src="/img-uploads/{{$user->prof_pic}}"/>
+                      @endif
+                  </a>
               <div class="text-center col-md-5">    
                 <h2> Genres Listened To </h2>
                 <ul>
