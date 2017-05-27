@@ -75,7 +75,7 @@
                         </audio>
                     @endif
                     </div>
-                    <p class="pull-right">
+                    <p id="plays-{{$post->id}}" class="pull-right">
                       {{$post->plays}} plays
                       <span id="plays-{{$post->id}}" class="glyphicon glyphicon-repeat"></span> 
                     </p>
