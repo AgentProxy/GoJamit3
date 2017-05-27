@@ -10,6 +10,7 @@
                             <div class="panel panel-default">
 								<!-- <div class="panel-heading"></div> -->
 							 	<div class="panel-body">
+							 	<div class="pull-right">{{ $notification->created_at->diffForHumans() }}</div>
 							 	@if($notification->type == "1")
 	                        		<a href="/profile/{{$user->where('id',$notification->notifier_id)->value('username')}}/about">{{$user->where('id',$notification->notifier_id)->value('username')}} </a> has followed you!
                           		@elseif($notification->type == "2")
@@ -18,6 +19,7 @@
                             	@else
                                 	<a href="/profile/{{$user->where('id',$notification->notifier_id)->value('username')}}/about">{{$user->where('id',$notification->notifier_id)->value('username')}} </a> has commented on your <a href="/post/{{$notification->notif_id}}">post</a>
                            		@endif</div>
+
 							</div>
 	                    
 	                </div>

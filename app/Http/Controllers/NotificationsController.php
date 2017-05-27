@@ -15,7 +15,7 @@ class NotificationsController extends Controller
 
         $user = User::whereUsername($username)->first();
         $user_id = $user->id;
-        $notifications = Notification::where('user_id', $user_id)
+        $notifications = Notification::where('user_id', $user_id)->orderBy('created_at','desc')
                ->get();
         Notification::where('user_id', $user_id)->where('seen','0')
                ->update(['seen' => '1']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Follow;
+use App\Notification;
 use Auth;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -153,6 +154,14 @@ class ProfileController extends Controller
                  'name'=>$follower_user->follower->fname
              );
          } 
+
+        $notification = new Notification;
+        $notification->user_id = $user_id;
+        $notification->seen = '0';
+        $notification->type = '1';
+        $notification->notif_id = Auth::user()->id;
+        $notification->notifier_id = Auth::user()->id;
+        $notification->save();
 
         return $follower_array;
     }
