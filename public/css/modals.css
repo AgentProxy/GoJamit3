@@ -34,3 +34,32 @@
 	color: black;
 }
 
+
+.modal-comments-prof-pic img{
+	width: 45px;
+	height: 45px;
+}
+
+.modal-comments-names{
+	margin-left: 5px;
+}
+
+.modal-comments-name{
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	margin: 0;
+	width: 100%;
+}
+
+.modal-comments-username{
+	font-size: 10px;
+	color: gray;
+	margin: 0;
+	width: 100%;
+}
+
+.modal-comments-body{
+	width: 100%;
+	padding: 10px 0px;
+}

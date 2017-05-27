@@ -193,20 +193,27 @@
               <div class="modal-body">
                 <p>
                   @forelse($post->comments as $comment)
-                      <div class="modal-comments-user">
-                          <a href="/profile/{{ $comment->commenter->username }}/about">
-                              @if($user->prof_pic == null)
-                              <img src="/img-uploads/maleDefault.png"/>
-                              @else
-                              <img src="/img-uploads/{{$user->prof_pic}}"/>
-                              @endif
-                          </a>
-                          <a href="/profile/{{ $comment->commenter->username }}/about">
-                              {{ $comment->commenter->username }}
-                          </a>
-                          <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                      <div class="modal-comments-user clearfix">
+                          <div class="pull-left">
+                            <a class="modal-comments-prof-pic pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                @if($user->prof_pic == null)
+                                <img src="/img-uploads/maleDefault.png"/>
+                                @else
+                                <img src="/img-uploads/{{$user->prof_pic}}"/>
+                                @endif
+                            </a>
+                            <div class="modal-comments-names pull-left">                            
+                              <a class="modal-comments-name pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                  {{ $comment->commenter->fname." ".$comment->commenter->lname }}
+                              </a>
+                              <a class="modal-comments-username pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                  {{ $comment->commenter->username }}
+                              </a>
+                            </div>
+                          </div>
+                          <div class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
                       </div>
-                      <div class="modal-comments-body">
+                      <div class="modal-comments-body pull-left">
                           <p>
                               {{ $comment->content }}
                           </p>
