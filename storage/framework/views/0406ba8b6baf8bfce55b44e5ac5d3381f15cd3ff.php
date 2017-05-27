@@ -45,7 +45,7 @@
 
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-    Nothing to see here, bitch.
+    <h1 style="text-align: center"> No jammers nearby found </h1>
 <?php endif; ?>
 
 <?php $__env->stopSection(); ?>

@@ -47,7 +47,7 @@
 
 
 @empty
-    Nothing to see here, bitch.
+    <h1 style="text-align: center"> No jammers nearby found </h1>
 @endforelse
 
 @endsection
