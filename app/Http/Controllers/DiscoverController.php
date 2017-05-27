@@ -37,12 +37,13 @@ class DiscoverController extends Controller
        
        foreach ($follow_users as $follow_user) {
            if($follow_user->age == 0){
+                $follow_user->fname;
                 $jammers[] = $follow_user;
                 // if($follow_user)
                 // foreach ($follow_user->genres as $genre) {
                         $genres = $follow_user->genres;
                         foreach($genres as $genre){
-                            echo $genre->genre;
+                            //echo $genre->genre;
                         }
                 // }
            }
