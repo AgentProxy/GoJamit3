@@ -32,17 +32,17 @@
                     <div class="post-user-name">
                       <div class="post-user-info pull-left">
                           <a class="post-prof-pic pull-left" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
-                               @if($user->prof_pic == null)
+                              @if($user->prof_pic == null)
                               <img src="/img-uploads/maleDefault.png"/>
                               @else
                               <img src="/img-uploads/{{$user->prof_pic}}"/>
                               @endif
                           </a>
-                          <div class="post-user-names">
-                              <a class="user-first-last-name" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
+                          <div class="post-user-names pull-left">
+                              <a class="user-first-last-name pull-left" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
                                   {{  $user->where('id',$post->user_id)->value('fname')." ".$user->where('id',$post->user_id)->value('lname')  }}
                               </a>
-                              <a class="user-username" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
+                              <a class="user-username pull-left" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
                                   {{ $user->where('id',$post->user_id)->value('username') }}  
                               </a>
                           </div>
@@ -148,8 +148,12 @@
                 <p>
                   @forelse($post->likes as $like)
                       <div class="modal-likers-info">
-                          <a href="/profile/{{ $like->liker->username }}/about">
-                              <img src="/img-uploads/{{ $like->liker->prof_pic }}" class="">
+                          <a href="/profile/{{ $like->liker->username }}/about">                              
+                              @if($user->prof_pic == null)
+                              <img src="/img-uploads/maleDefault.png"/>
+                              @else
+                              <img src="/img-uploads/{{$user->prof_pic}}"/>
+                              @endif
                           </a>
                           <div class="modal-likers-names">
                               <a class="modal-likers-name" href="/profile/{{ $like->liker->username }}/about">
