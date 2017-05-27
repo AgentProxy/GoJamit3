@@ -19,53 +19,56 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/discover_intro/{username}', 'ProfileController@returnDiscover');
-Route::get('/notifications/{username}','NotificationsController@index');
 
-Route::get('/post/{post_id}','PostsController@post');
-// Route::get('/profile/{username}/about','ProfileController@profile')->name('profile');
-Route::get('/post/delete/{post_id}','PostsController@delete');
+Route::group(['middleware' => 'auth'], function(){
 
-Route::get('/post/play/{post_id}','PostsController@play');
+	Route::get('/notifications/{username}','NotificationsController@index');
 
-Route::get('/post/like/{post_id}','PostsController@like');
+	Route::get('/post/{post_id}','PostsController@post');
 
-Route::get('/post/unlike/{post_id}','PostsController@unlike');
+	Route::get('/post/delete/{post_id}','PostsController@delete');
 
-Route::get('/profile/{username}/about','ProfileController@about');
+	Route::get('/post/play/{post_id}','PostsController@play');
 
-Route::get('/profile/{username}/posts','PostsController@profile');
+	Route::get('/post/like/{post_id}','PostsController@like');
 
-Route::post('/create_post/{username}','PostsController@create');
+	Route::get('/post/unlike/{post_id}','PostsController@unlike');
 
-Route::post('/profile/update_photo/{id}','ProfileController@updatePhoto');
+	Route::get('/profile/{username}/about','ProfileController@about');
 
-Route::get('/profile/{username}/settings/','ProfileController@edit');
+	Route::get('/profile/{username}/posts','PostsController@profile');
 
-Route::put('user/settings/{id}','ProfileController@update');
+	Route::post('/create_post/{username}','PostsController@create');
 
-Route::get('/discover/{username}', 'DiscoverController@index');
+	Route::post('/profile/update_photo/{id}','ProfileController@updatePhoto');
 
-Route::post('/discover/jammers', 'DiscoverController@discover');
+	Route::get('/profile/{username}/settings/','ProfileController@edit');
 
-Route::get('/profile/follow/{username}', 'ProfileController@followUser');
+	Route::put('user/settings/{id}','ProfileController@update');
 
-Route::get('/profile/unfollow/{username}', 'ProfileController@unfollowUser');
+	Route::get('/discover', 'DiscoverController@index');
 
-// Route::get('/profile/{username}/posts', 'PostsController@index');
-Route::post('/create_comment/{post_id}', 'PostsController@comment');
+	Route::post('/discover/jammers', 'DiscoverController@discover');
 
-Route::resource('genre', 'GenreController',['except'=>['create']]);
+	Route::get('/profile/follow/{username}', 'ProfileController@followUser');
 
-Route::resource('/comments/{{post_id}}','CommentsController');
+	Route::get('/profile/unfollow/{username}', 'ProfileController@unfollowUser');
+
+	// Route::get('/profile/{username}/posts', 'PostsController@index');
+	Route::post('/create_comment/{post_id}', 'PostsController@comment');
+
+	Route::resource('genre', 'GenreController',['except'=>['create']]);
+
+	Route::resource('/comments/{{post_id}}','CommentsController');
 
 
-Route::get('/messages', 'MessageController@getMessages');
+	Route::get('/messages', 'MessageController@getMessages');
 
-Route::post('/messages', 'MessageController@sendMessage');
+	Route::post('/messages', 'MessageController@sendMessage');
 
-Route::get('/messages/{conversation_num}', 'MessageController@getConversation');
+	Route::get('/messages/{conversation_num}', 'MessageController@getConversation');
 
-Route::get('/sentmessages', 'MessageController@sentMessages');
+	Route::get('/sentmessages', 'MessageController@sentMessages');
 
-Route::post('/sendconversation', 'MessageController@sendConversation');
+	Route::post('/sendconversation', 'MessageController@sendConversation');
+});

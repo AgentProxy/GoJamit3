@@ -109,7 +109,7 @@
                             <a href="/home">Home</a>
                         </li>
                         <li>
-                            <a href="/discover/{{Auth::user()->username}}">Discover</a>
+                            <a href="/discover">Discover</a>
                         </li>
                     </ul>
                 </div>

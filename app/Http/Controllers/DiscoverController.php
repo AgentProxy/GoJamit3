@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Input;
 class DiscoverController extends Controller
 {
     //
-    public function index($username){
+    public function index(){
 
-      $user = User::whereUsername($username)->first();
-      $user = User::findOrFail($user->id);
+      // $user = User::whereUsername($username)->first();
+      $user = User::findOrFail(Auth::user()->id);
 
         return view('discover.discover',compact('user'));
     }
@@ -60,8 +60,8 @@ class DiscoverController extends Controller
       // Convert the distance in degrees to the chosen unit (kilometres, miles or nautical miles)
 
         $distance = $degrees * 111.13384; // 1 degree = 111.13384 km, based on the average diameter of the Earth (12,735 km)
-         
-      return round($distance, $decimals);
+        // $distance*=0.1;
+      return round($distance, 2);
     }
        
     foreach ($follow_users as $follow_user) {
