@@ -148,11 +148,11 @@
                 <p>
                   @forelse($post->likes as $like)
                       <div class="modal-likers-info">
-                          <a href="/profile/{{ $like->liker->username }}/about">                              
-                              @if($user->prof_pic == null)
+                          <a href="/profile/{{ $like->liker->username }}/about"> 
+                              @if($like->liker->prof_pic == null)
                               <img src="/img-uploads/maleDefault.png"/>
                               @else
-                              <img src="/img-uploads/{{$user->prof_pic}}"/>
+                              <img src="/img-uploads/{{$like->liker->prof_pic}}"/>
                               @endif
                           </a>
                           <div class="modal-likers-names">
@@ -160,12 +160,14 @@
                                   {{ $like->liker->fname." ".$like->liker->lname }}
                               </a>
                               <a class="modal-likers-username" href="/profile/{{ $like->liker->username }}/about">
-                                  {{ $like->liker->fname." ".$like->liker->lname }}
+                                  {{ $like->liker->username}}
                               </a>
                           </div>
                       </div>
                   @empty
-                      no likes yet
+                      <div class="text-center">
+                          <p>No likes yet.</p>
+                      </div>
                   @endforelse
                 </p>
               </div>
@@ -191,16 +193,28 @@
               <div class="modal-body">
                 <p>
                   @forelse($post->comments as $comment)
-                      <div class="panel">
-                      <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
-                          <a href="/profile/{{ $comment->commenter->username }}/about">{{ $comment->commenter->username }}</a>
-                          
+                      <div class="modal-comments-user">
+                          <a href="/profile/{{ $comment->commenter->username }}/about">
+                              @if($user->prof_pic == null)
+                              <img src="/img-uploads/maleDefault.png"/>
+                              @else
+                              <img src="/img-uploads/{{$user->prof_pic}}"/>
+                              @endif
+                          </a>
+                          <a href="/profile/{{ $comment->commenter->username }}/about">
+                              {{ $comment->commenter->username }}
+                          </a>
+                          <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                      </div>
+                      <div class="modal-comments-body">
                           <p>
                               {{ $comment->content }}
                           </p>
                       </div>
                   @empty
-                      no comments yet
+                      <div class="text-center">
+                          No comments yet
+                      </div>
                   @endforelse
                 </p>
               </div>
