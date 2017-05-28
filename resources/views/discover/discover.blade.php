@@ -38,41 +38,10 @@ console.log("hello");
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label">Sex</label>
-                        <label for="male" class="radio-inline"><input id="male" type="radio" name="sex" value="M">Male</label>
-                        <label for="female" class="radio-inline"><input id="female" type="radio" name="sex" value="F">Female</label>
-                    </div>
-                    <!--  <div class="form-group">
-                        <label class="col-md-4 control-label">Genres Listened </label>
-
-                        <div class="col-md-6 checkbox">
-                           <label for="jazz"><input name="genres[]" id="jazz" type="checkbox" value="1">Jazz</label>
-
-                            <label for="rock"><input name="genres[]" id="rock" type="checkbox" value="2">Rock</label>
-
-                            <label for="blues"><input name="genres[]" id="blues" type="checkbox" value="3">Blues</label>
-
-                            <label for="folk"><input name="genres[]" id="folk" type="checkbox" value="4">Folk</label>
-
-                            <label for="hiphop"><input name="genres[]" id="hiphop" type="checkbox" value="5">Hip Hop</label>
-                        </div>
+                        <label for="male" class="radio-inline"><input id="male" type="radio" name="sex" value="M" required="">Male</label>
+                        <label for="female" class="radio-inline"><input id="female" type="radio" name="sex" value="F" required="">Female</label>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Instruments Played</label>
-
-                        <div class="col-md-6 checkbox">
-                           <label for="guitar"><input name="instruments[]" id="guitar" type="checkbox" value="1">Guitar</label>
-
-                            <label for="piano"><input name="instruments[]" id="piano" type="checkbox" value="2">Piano</label>
-
-                            <label for="Ukulele"><input name="instruments[]" id="ukulele" type="checkbox" value="3">Ukulele</label>
-
-                            <label for="Violin"><input name="instruments[]" id="violin" type="checkbox" value="4">Violin</label>
-
-                            <label for="saxophone"><input name="instruments[]" id="saxophone" type="checkbox" value="5">Saxophone</label>
-                        </div>
-                    </div>
- -->
                         <input type="text" id="longitude" name="longitude" value="2.0" hidden/>
                         <input type="text" id="latitude" name="latitude" value="2.0" hidden/>
                         <button type="submit" class="btn btn-success"> Search </button>

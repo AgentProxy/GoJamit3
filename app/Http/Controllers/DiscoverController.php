@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Input;
 class DiscoverController extends Controller
 {
     //
-    public function index($username){
+    public function index(){
 
-      $user = User::whereUsername($username)->first();
-      $user = User::findOrFail($user->id);
+      $user = User::findOrFail(Auth::user()->id);
 
-        return view('discover.discover',compact('user'));
+      return view('discover.discover',compact('user'));
     }
 
     public function discover(Request $request){
@@ -24,9 +23,10 @@ class DiscoverController extends Controller
       $user['longitude'] = (number_format($request->longitude,8,'.',''));
       $user->update();
 
+       echo $user['latitude']." ".$user['longitude'];
 
       $age = $request->age_slider;
-      $distance = $request->distance;
+      $distance = $request->distance_slider;
       $sex = $request->sex;
 
       $following_ids = array();
@@ -59,15 +59,14 @@ class DiscoverController extends Controller
      
       // Convert the distance in degrees to the chosen unit (kilometres, miles or nautical miles)
 
-        $distance = $degrees * 111.13384; // 1 degree = 111.13384 km, based on the average diameter of the Earth (12,735 km)
-         
-      return round($distance, $decimals);
+      $distance = $degrees * 111.13384; // 1 degree = 111.13384 km, based on the average diameter of the Earth (12,735 km)
+      return round($distance, 2);
     }
        
     foreach ($follow_users as $follow_user) {
       if(($follow_user->age <= $age && $follow_user->age >= '16')&&($follow_user->sex == $sex)){
-        echo distanceCalculation($user['latitude'],$user['longitude'],$follow_user->latitude,$follow_user->longitude, $decimals = 2);
-
+        // echo d
+        // echo $follow_user->fname."distance based: ".$distance." Distance: ".distanceCalculation($user['latitude'],$user['longitude'],$follow_user->latitude,$follow_user->longitude, $decimals = 2)."\n";
         if(distanceCalculation($user['latitude'],$user['longitude'],$follow_user->latitude,$follow_user->longitude, $decimals = 2)<=$distance){
           $jammers[] = $follow_user;
         }
