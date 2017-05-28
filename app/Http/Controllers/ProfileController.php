@@ -128,7 +128,7 @@ class ProfileController extends Controller
         $user->prof_pic = $filename;
         $user->save();
         // return redirect('/home');
-        // return redirect("/profile/".$user->username."/about");
+        return redirect("/profile/".$user->username."/posts");
     }
 
     public function returnDiscover($username){
