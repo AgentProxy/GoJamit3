@@ -2,6 +2,7 @@
 
 @section('headabout')
 <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+<link href="{{ asset('css/modals.css') }}" rel="stylesheet">
 @endsection
 
 @section('details')
@@ -138,69 +139,104 @@
           </div>
       </div>
       <!--  END OF MODAL -->
-      <!--Likers Modal -->
-      <div class="modal fade" id="likersModal-{{$post->id}}" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Likers</h4>
+        <!--Likers Modal -->
+        <div class="modal fade modal-likers" id="likersModal-{{$post->id}}" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Likers</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  @forelse($post->likes as $like)
+                      <div class="modal-likers-info">
+                          <a href="/profile/{{ $like->liker->username }}/about"> 
+                              @if($like->liker->prof_pic == null)
+                              <img src="/img-uploads/maleDefault.png"/>
+                              @else
+                              <img src="/img-uploads/{{$like->liker->prof_pic}}"/>
+                              @endif
+                          </a>
+                          <div class="modal-likers-names">
+                              <a class="modal-likers-name" href="/profile/{{ $like->liker->username }}/about">
+                                  {{ $like->liker->fname." ".$like->liker->lname }}
+                              </a>
+                              <a class="modal-likers-username" href="/profile/{{ $like->liker->username }}/about">
+                                  {{ $like->liker->username}}
+                              </a>
+                          </div>
+                      </div>
+                  @empty
+                      <div class="text-center">
+                          <p>No likes yet.</p>
+                      </div>
+                  @endforelse
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
-            <div class="modal-body">
-              <p>
-                @forelse($post->likes as $like)
-                    <div>
-                        <a href="/profile/{{ $like->liker->username }}/about">{{ $like->liker->username }}</a>
-                    </div>
-                @empty
-                    no likes yet
-                @endforelse
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            
           </div>
-          
         </div>
-      </div>
-  <!-- End of Modal -->
+    <!-- End of Modal -->
 
-  <!--Likers Modal -->
-      <div class="modal fade" id="commentsModal-{{$post->id}}" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Comments</h4>
-            </div>
-            <div class="modal-body">
-              <p>
-                @forelse($post->comments as $comment)
-                    <div class="panel">
-                    <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
-                        <a href="/profile/{{ $comment->commenter->username }}/about">{{ $comment->commenter->username }}</a>
-                        
-                        <p>
-                            {{ $comment->content }}
-                        </p>
-                    </div>
-                @empty
-                    no comments yet
-                @endforelse
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
+    <!--Likers Modal -->
+        <div class="modal fade" id="commentsModal-{{$post->id}}" role="dialog">
+          <div class="modal-dialog">
           
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Comments</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  @forelse($post->comments as $comment)
+                      <div class="modal-comments-user clearfix">
+                          <div class="pull-left">
+                            <a class="modal-comments-prof-pic pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                @if($user->prof_pic == null)
+                                <img src="/img-uploads/maleDefault.png"/>
+                                @else
+                                <img src="/img-uploads/{{$user->prof_pic}}"/>
+                                @endif
+                            </a>
+                            <div class="modal-comments-names pull-left">                            
+                              <a class="modal-comments-name pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                  {{ $comment->commenter->fname." ".$comment->commenter->lname }}
+                              </a>
+                              <a class="modal-comments-username pull-left" href="/profile/{{ $comment->commenter->username }}/about">
+                                  {{ $comment->commenter->username }}
+                              </a>
+                            </div>
+                          </div>
+                          <div class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                      </div>
+                      <div class="modal-comments-body pull-left">
+                          <p>
+                              {{ $comment->content }}
+                          </p>
+                      </div>
+                  @empty
+                      <div class="text-center">
+                          No comments yet
+                      </div>
+                  @endforelse
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
         </div>
-      </div>
+      <!-- End of Modal -->
 
       @empty
           <div class="col-md-10 col-md-offset-1 ">
