@@ -116,7 +116,7 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#">Messages <span class="badge">0</span></a>
+                            <a href="/messages">Messages <span class="badge">0</span></a>
                         </li>
                         <li>
                             <a id="notifs-tab" href="/notifications/<?php echo e(Auth::user()->username); ?>"> Notifications <span class="badge"><?php echo e(Auth::user()->notifications->where('seen',0)->count()); ?></span>
@@ -160,5 +160,7 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/messages.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/conversation.js')); ?>"></script>
 </body>
 </html>
