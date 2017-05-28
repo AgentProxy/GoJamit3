@@ -4,6 +4,9 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Message;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -66,9 +69,15 @@ class User extends Authenticatable
     }
 
     public function getMessages() {
-        $message1 = DB::table('messages')
-                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
-                    ->where('sender_id', Auth::user()->id)->orWhere('receiver_id',  Auth::user()->id)
+        // $message1 = DB::table('messages')
+        //             ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+        //             ->where('sender_id', Auth::user()->id)->orWhere('receiver_id',  Auth::user()->id)
+        //             ->groupBy('conversation_num')
+        //             ->orderBy('created_at', 'desc')
+        //             ->get();
+
+        $message1 = Message::
+                    where('sender_id', Auth::user()->id)->orWhere('receiver_id',  Auth::user()->id)
                     ->groupBy('conversation_num')
                     ->orderBy('created_at', 'desc')
                     ->get();
@@ -78,9 +87,13 @@ class User extends Authenticatable
     }
 
     public function getConversation($conversation_num) {
-        $message1 = DB::table('messages')
-                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
-                    ->where('conversation_num', $conversation_num)
+        // $message1 = DB::table('messages')
+        //             ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+        //             ->where('conversation_num', $conversation_num)
+        //             ->get();
+
+        $message1 = Message::
+                    where('conversation_num', $conversation_num)
                     ->get();
                     
         return $message1;
@@ -105,9 +118,14 @@ class User extends Authenticatable
     }
 
     public function sentMessages() {
-        $sent = DB::table('messages')
-                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
-                    ->where('sender_id', Auth::user()->id)
+        // $sent = DB::table('messages')
+        //             ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+        //             ->where('sender_id', Auth::user()->id)
+        //             ->orderBy('created_at', 'desc')
+        //             ->get();
+
+        $sent =     Message::
+                    where('sender_id', Auth::user()->id)
                     ->orderBy('created_at', 'desc')
                     ->get();
 

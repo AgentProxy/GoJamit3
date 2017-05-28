@@ -12,7 +12,8 @@ class MessageController extends Controller
 {
     function getMessages() {
         $messages = Auth::user()->getMessages();
-    	return view('communication.messages', compact('messages'));
+        $users = User::all();
+        return view('communication.messages', compact('messages', 'users'));
     }
 
     function sentMessages() {
@@ -50,20 +51,20 @@ class MessageController extends Controller
         }
 
      
-    	Message::create([
-    		'content'=>$content,
-    		'sender_id'=>Auth::user()->id,
-    		'receiver_id'=>$receiver_id,
-    		'seen'=>'0',
+        Message::create([
+            'content'=>$content,
+            'sender_id'=>Auth::user()->id,
+            'receiver_id'=>$receiver_id,
+            'seen'=>'0',
             'conversation_num'=>$conversation_num,
-    	]);
+        ]);
 
     }
 
     function getConversation($conversation_num) {
-    	$conversations = Auth::user()->getConversation($conversation_num);
+        $conversations = Auth::user()->getConversation($conversation_num);
         $one = $conversations->first();
-    	return view('communication.conversation', compact('conversations', 'one'));
+        return view('communication.conversation', compact('conversations', 'one'));
     }
 
     function sendConversation(Request $request) {

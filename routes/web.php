@@ -57,7 +57,7 @@ Route::post('/create_comment/{post_id}', 'PostsController@comment');
 
 Route::resource('genre', 'GenreController',['except'=>['create']]);
 
-Route::resource('/comments/{{post_id}}','CommentsController');
+// Route::resource('/comments/{{post_id}}','CommentsController');
 
 
 Route::get('/messages', 'MessageController@getMessages');

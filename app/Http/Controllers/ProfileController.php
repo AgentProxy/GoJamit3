@@ -7,6 +7,10 @@ use App\User;
 use App\Follow;
 use Auth;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Genre;
+use App\User_genre;
+use App\Instrument;
+use App\User_instrument;
 
 class ProfileController extends Controller
 {
@@ -30,6 +34,9 @@ class ProfileController extends Controller
 
         return view('user.profile',compact('user','followed'));
     }
+
+
+    
 
     public function index()
     {
@@ -77,7 +84,12 @@ class ProfileController extends Controller
     {
         //
         $user = User::whereUsername($username)->first();
-        return view('user.settings',compact('user'));
+        $genres =  Genre::all();
+        $user_genres = User_genre::whereUser_id(Auth::user()->id)->get();
+        $instruments =  Instrument::all();
+        $user_instruments = User_instrument::whereUser_id(Auth::user()->id)->get();
+
+        return view('user.settings',compact('user', 'genres', 'user_genres', 'instruments', 'user_instruments'));
     }
 
     public function about($username)
@@ -107,12 +119,34 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $genres = $request->input('genres');
+        $instruments = $request->input('instruments');
+
+        User_genre::where('user_id', Auth::user()->id)->delete();
+        User_instrument::where('user_id', Auth::user()->id)->delete();
+
+        foreach ($genres as $key => $value) {
+            User_genre::create([
+                'user_id'=>Auth::user()->id,
+                'genre_id'=>$value,
+            ]);
+        }
+
+        foreach ($instruments as $key => $value) {
+            User_instrument::create([
+                'user_id'=>Auth::user()->id,
+                'instrument_id'=>$value,
+            ]);
+        }
+        
+
         $user = User::findOrFail($id);
         $user->update($request->all());
+
         $username = $request['username'];
 
-        // return redirect()->route('profile', $username, 'settings');
-        return redirect("/profile/".$username."/settings");
+
+        return redirect('profile/'.$username.'/about');
     }
 
     public function updatePhoto(Request $request, $id){

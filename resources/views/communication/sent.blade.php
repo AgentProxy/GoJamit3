@@ -153,7 +153,7 @@
                                 @endif
                                 <td class="view-message ">{{ substr($message->content, 0, 50) }}</td>
                                 <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                                <td class="view-message  text-right">{{ $message->created_at }}</td>
+                                <td class="view-message  text-right">{{ $message->created_at->diffForHumans() }}</td>
                               </tr>
                             
                             @empty
@@ -164,5 +164,6 @@
                       </div>
                   </aside>
               </div>
+              <script src="{{ asset('js/message.js') }}"></script>
 </div>
 @endsection

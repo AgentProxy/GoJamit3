@@ -159,7 +159,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/messages.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/conversation.js') }}"></script>
+    
 </body>
 </html>

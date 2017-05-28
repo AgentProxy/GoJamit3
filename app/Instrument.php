@@ -12,7 +12,6 @@ class Instrument extends Model
     }
 
     public $timestamps = false;
-   // protected $table = 'user_instruments';
     protected $fillable = [
         'user_id','instrument_id'
     ];
