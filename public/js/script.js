@@ -140,7 +140,7 @@ function audioPlay(post_id){
 		type: "get",
 		success:function(data){
 			 console.log("Data: " + data);
-			 $("#plays-"+post_id).html(data + " plays");
+			 $("#plays-"+post_id).html(data + " plays <span id='plays-{{$post->id}}' class='glyphicon glyphicon-repeat'></span> ");
 			 console.log(data);
 		}
 	});

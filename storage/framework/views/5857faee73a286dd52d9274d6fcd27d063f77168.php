@@ -76,7 +76,7 @@
                         </audio>
                     <?php endif; ?>
                     </div>
-                    <p class="pull-right">
+                    <p id="plays-<?php echo e($post->id); ?>" class="pull-right">
                       <?php echo e($post->plays); ?> plays
                       <span id="plays-<?php echo e($post->id); ?>" class="glyphicon glyphicon-repeat"></span> 
                     </p>

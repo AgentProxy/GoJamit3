@@ -90,7 +90,7 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="/">
                         <span>                        
-                            <img class="logo" src="/img-uploads/gojammitLogo.png" /> 
+                            <img class="" src="/img-uploads/gojammitLogo.png" /> 
                             <p>GOJamIt!</p>
                         </span>
                     </a>
@@ -157,41 +157,6 @@
 
         <?php echo $__env->yieldContent('content'); ?>
     </div>
-
-     <!-- Notifs Modal -->
-      <!--   <div class="modal fade" id="notifsModal" role="dialog">
-            <div class="modal-dialog"> -->
-                <!-- Modal content-->
-                <!-- <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Notifications</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <?php $__empty_1 = true; $__currentLoopData = Auth::user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <div>
-                                <?php if($notification->type == "1"): ?>
-                                    <a><?php echo e($notification->notifier_id); ?></a> has followed you;
-                                <?php elseif($notification->type == "2"): ?>
-                                    <?php echo e($notification->id); ?> has liked your post;
-                                <?php else: ?>
-                                    <?php echo e($notification->id); ?> has commented on your post;
-                                <?php endif; ?>
-                            </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                <p>Oh no! Nobody is following you.</p> 
-                        <?php endif; ?>
-                    </div>
-                    <div class="modal-footer">
-                        <p> </p>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div> -->
-<!-- 
-            </div>
-        </div> -->
-        <!--  END OF MODAL -->
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
