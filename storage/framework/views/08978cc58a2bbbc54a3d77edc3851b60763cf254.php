@@ -7,6 +7,7 @@
                             <div class="panel panel-default">
 								<!-- <div class="panel-heading"></div> -->
 							 	<div class="panel-body">
+							 	<div class="pull-right"><?php echo e($notification->created_at->diffForHumans()); ?></div>
 							 	<?php if($notification->type == "1"): ?>
 	                        		<a href="/profile/<?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?>/about"><?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?> </a> has followed you!
                           		<?php elseif($notification->type == "2"): ?>
@@ -15,6 +16,7 @@
                             	<?php else: ?>
                                 	<a href="/profile/<?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?>/about"><?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?> </a> has commented on your <a href="/post/<?php echo e($notification->notif_id); ?>">post</a>
                            		<?php endif; ?></div>
+
 							</div>
 	                    
 	                </div>

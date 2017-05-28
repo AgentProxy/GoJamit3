@@ -31,18 +31,18 @@
                     <div class="post-user-name">
                       <div class="post-user-info pull-left">
                           <a class="post-prof-pic pull-left" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
-                               <?php if($user->prof_pic == null): ?>
+                              <?php if($user->prof_pic == null): ?>
                               <img src="/img-uploads/maleDefault.png"/>
                               <?php else: ?>
                               <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
                               <?php endif; ?>
                           </a>
-                          <div class="post-user-names">
-                              <a class="user-first-last-name" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
+                          <div class="post-user-names pull-left">
+                              <a class="user-first-last-name pull-left" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
                                   <?php echo e($user->where('id',$post->user_id)->value('fname')." ".$user->where('id',$post->user_id)->value('lname')); ?>
 
                               </a>
-                              <a class="user-username" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
+                              <a class="user-username pull-left" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
                                   <?php echo e($user->where('id',$post->user_id)->value('username')); ?>  
                               </a>
                           </div>
@@ -150,8 +150,12 @@
                 <p>
                   <?php $__empty_2 = true; $__currentLoopData = $post->likes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $like): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
                       <div class="modal-likers-info">
-                          <a href="/profile/<?php echo e($like->liker->username); ?>/about">
-                              <img src="/img-uploads/<?php echo e($like->liker->prof_pic); ?>" class="">
+                          <a href="/profile/<?php echo e($like->liker->username); ?>/about"> 
+                              <?php if($like->liker->prof_pic == null): ?>
+                              <img src="/img-uploads/maleDefault.png"/>
+                              <?php else: ?>
+                              <img src="/img-uploads/<?php echo e($like->liker->prof_pic); ?>"/>
+                              <?php endif; ?>
                           </a>
                           <div class="modal-likers-names">
                               <a class="modal-likers-name" href="/profile/<?php echo e($like->liker->username); ?>/about">
@@ -159,13 +163,15 @@
 
                               </a>
                               <a class="modal-likers-username" href="/profile/<?php echo e($like->liker->username); ?>/about">
-                                  <?php echo e($like->liker->fname." ".$like->liker->lname); ?>
+                                  <?php echo e($like->liker->username); ?>
 
                               </a>
                           </div>
                       </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                      no likes yet
+                      <div class="text-center">
+                          <p>No likes yet.</p>
+                      </div>
                   <?php endif; ?>
                 </p>
               </div>
@@ -191,17 +197,30 @@
               <div class="modal-body">
                 <p>
                   <?php $__empty_2 = true; $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                      <div class="panel">
-                      <span class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
-                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about"><?php echo e($comment->commenter->username); ?></a>
-                          
+                      <div class="modal-comments-user">
+                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                              <?php if($user->prof_pic == null): ?>
+                              <img src="/img-uploads/maleDefault.png"/>
+                              <?php else: ?>
+                              <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
+                              <?php endif; ?>
+                          </a>
+                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                              <?php echo e($comment->commenter->username); ?>
+
+                          </a>
+                          <span class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
+                      </div>
+                      <div class="modal-comments-body">
                           <p>
                               <?php echo e($comment->content); ?>
 
                           </p>
                       </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                      no comments yet
+                      <div class="text-center">
+                          No comments yet
+                      </div>
                   <?php endif; ?>
                 </p>
               </div>
