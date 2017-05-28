@@ -197,21 +197,29 @@
               <div class="modal-body">
                 <p>
                   <?php $__empty_2 = true; $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                      <div class="modal-comments-user">
-                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about">
-                              <?php if($user->prof_pic == null): ?>
-                              <img src="/img-uploads/maleDefault.png"/>
-                              <?php else: ?>
-                              <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
-                              <?php endif; ?>
-                          </a>
-                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about">
-                              <?php echo e($comment->commenter->username); ?>
+                      <div class="modal-comments-user clearfix">
+                          <div class="pull-left">
+                            <a class="modal-comments-prof-pic pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                <?php if($user->prof_pic == null): ?>
+                                <img src="/img-uploads/maleDefault.png"/>
+                                <?php else: ?>
+                                <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
+                                <?php endif; ?>
+                            </a>
+                            <div class="modal-comments-names pull-left">                            
+                              <a class="modal-comments-name pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->fname." ".$comment->commenter->lname); ?>
 
-                          </a>
-                          <span class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
+                              </a>
+                              <a class="modal-comments-username pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->username); ?>
+
+                              </a>
+                            </div>
+                          </div>
+                          <div class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
                       </div>
-                      <div class="modal-comments-body">
+                      <div class="modal-comments-body pull-left">
                           <p>
                               <?php echo e($comment->content); ?>
 
