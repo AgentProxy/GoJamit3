@@ -1,5 +1,4 @@
-  <?php
-
+<?php 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,8 +11,8 @@ class DiscoverController extends Controller
     //
     public function index($username){
 
-    	$user = User::whereUsername($username)->first();
-    	$user = User::findOrFail($user->id);
+      $user = User::whereUsername($username)->first();
+      $user = User::findOrFail($user->id);
 
         return view('discover.discover',compact('user'));
     }
