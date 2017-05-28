@@ -44,11 +44,11 @@
                             <img src="/img-uploads/{{$user->prof_pic}}"/>
                             @endif
                         </a>
-                        <div class="post-user-names">
-                            <a class="user-first-last-name" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
+                        <div class="post-user-names pull-left">
+                            <a class="user-first-last-name pull-left" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
                                 {{  $user->where('id',$post->user_id)->value('fname')." ".$user->where('id',$post->user_id)->value('lname')  }}
                             </a>
-                            <a class="user-username" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
+                            <a class="user-username pull-left" href="profile/{{$user->where('id',$post->user_id)->value('username')}}/about" >
                                 {{ $user->where('id',$post->user_id)->value('username') }}  
                             </a>
                         </div>

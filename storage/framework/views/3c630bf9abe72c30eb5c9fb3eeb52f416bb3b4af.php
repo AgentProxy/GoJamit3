@@ -7,10 +7,14 @@
 <?php $__env->startSection('content'); ?>
  	<div class="row">
         <div class="col-md-8 col-md-offset-2">
-	        <h3>Notifications</h3>
+	        <div class="panel panel-default">
+	            <div class="panel-heading text-center">
+	                <h3>Notifications</h3>
+	            </div>
+	        </div>
 	    <?php $__empty_1 = true; $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="notif-content-panel" id="notif-<?php echo e($notification->id); ?>">
-                <div class="notif-content-body col-xs-12">
+                <div class="notif-content-body">
                     <div class="panel panel-default">
 					 	<div class="panel-body">
                     		<a class="notif-user-image pull-left" href="/profile/<?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?>/about">

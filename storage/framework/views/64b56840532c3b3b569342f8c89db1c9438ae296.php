@@ -43,12 +43,12 @@
                             <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
                             <?php endif; ?>
                         </a>
-                        <div class="post-user-names">
-                            <a class="user-first-last-name" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
+                        <div class="post-user-names pull-left">
+                            <a class="user-first-last-name pull-left" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
                                 <?php echo e($user->where('id',$post->user_id)->value('fname')." ".$user->where('id',$post->user_id)->value('lname')); ?>
 
                             </a>
-                            <a class="user-username" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
+                            <a class="user-username pull-left" href="profile/<?php echo e($user->where('id',$post->user_id)->value('username')); ?>/about" >
                                 <?php echo e($user->where('id',$post->user_id)->value('username')); ?>  
                             </a>
                         </div>

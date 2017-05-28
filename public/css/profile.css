@@ -6,6 +6,7 @@
 	padding: 0px;
 	background-color: rgb(247, 247, 247);
 	font-family: 'Open Sans', sans-serif;
+	margin-top: -5px;
 }
 
 .profile-pic-form{
@@ -73,7 +74,7 @@
 	width: 100%;
 	float: left;
 	/*background-color: rgba(255, 255, 255, 0);*/
-	padding-top: 10px;
+	margin-top: 15px;
 	border: none;
 	margin-right: 10px;
 }
@@ -85,8 +86,8 @@
 }
 
 .profile-mini-nav .btn, .profile-mini-nav li > a{
-	font-size: 18px;
-	width: 90px;
+	font-size: 15px;
+	width: 80px;
 	margin-right: 5px;
 	margin-left: 5px;
 }

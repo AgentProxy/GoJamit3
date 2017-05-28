@@ -26,7 +26,7 @@
         }
 
         .navbar{
-            margin-bottom: 0;
+            margin-bottom: 5px;
             background-color: rgb(15, 15, 15);
 
         }

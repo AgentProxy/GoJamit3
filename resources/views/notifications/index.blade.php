@@ -9,10 +9,14 @@
 @section('content')
  	<div class="row">
         <div class="col-md-8 col-md-offset-2">
-	        <h3>Notifications</h3>
+	        <div class="panel panel-default">
+	            <div class="panel-heading text-center">
+	                <h3>Notifications</h3>
+	            </div>
+	        </div>
 	    @forelse($notifications as $notification)
             <div class="notif-content-panel" id="notif-{{$notification->id}}">
-                <div class="notif-content-body col-xs-12">
+                <div class="notif-content-body">
                     <div class="panel panel-default">
 					 	<div class="panel-body">
                     		<a class="notif-user-image pull-left" href="/profile/{{$user->where('id',$notification->notifier_id)->value('username')}}/about">
