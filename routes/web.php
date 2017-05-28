@@ -58,3 +58,14 @@ Route::post('/create_comment/{post_id}', 'PostsController@comment');
 Route::resource('genre', 'GenreController',['except'=>['create']]);
 
 Route::resource('/comments/{{post_id}}','CommentsController');
+
+
+Route::get('/messages', 'MessageController@getMessages');
+
+Route::post('/messages', 'MessageController@sendMessage');
+
+Route::get('/messages/{conversation_num}', 'MessageController@getConversation');
+
+Route::get('/sentmessages', 'MessageController@sentMessages');
+
+Route::post('/sendconversation', 'MessageController@sendConversation');

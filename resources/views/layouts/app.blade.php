@@ -116,7 +116,7 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#">Messages <span class="badge">0</span></a>
+                            <a href="/messages">Messages <span class="badge">0</span></a>
                         </li>
                         <li>
                             <a id="notifs-tab" href="/notifications/{{Auth::user()->username}}"> Notifications <span class="badge">{{Auth::user()->notifications->where('seen',0)->count()}}</span>
@@ -194,5 +194,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/messages.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/conversation.js') }}"></script>
 </body>
 </html>

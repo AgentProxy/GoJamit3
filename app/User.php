@@ -64,4 +64,53 @@ class User extends Authenticatable
     {   
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function getMessages() {
+        $message1 = DB::table('messages')
+                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+                    ->where('sender_id', Auth::user()->id)->orWhere('receiver_id',  Auth::user()->id)
+                    ->groupBy('conversation_num')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                    
+
+        return $message1;
+    }
+
+    public function getConversation($conversation_num) {
+        $message1 = DB::table('messages')
+                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+                    ->where('conversation_num', $conversation_num)
+                    ->get();
+                    
+        return $message1;
+    }
+
+    public function getReceiver($receiver_id) {
+        $receiver = DB::table('users')
+                    ->select('fname', 'lname', 'email', 'birthdate', 'username','sex', 'id')
+                    ->where('id', $receiver_id)
+                    ->first();
+
+        return $receiver;
+    }
+
+    public function getSender($sender_id) {
+        $sender = DB::table('users')
+                    ->select('fname', 'lname', 'email', 'birthdate', 'username','sex', 'id')
+                    ->where('id', $sender_id)
+                    ->first();
+
+        return $sender;
+    }
+
+    public function sentMessages() {
+        $sent = DB::table('messages')
+                    ->select('sender_id','receiver_id', 'content', 'conversation_num', 'seen', 'created_at', 'updated_at', 'id')
+                    ->where('sender_id', Auth::user()->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+        return $sent;
+    }
 }
