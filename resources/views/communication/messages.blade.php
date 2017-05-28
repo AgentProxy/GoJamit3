@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('head')
-   <link href="{{ asset('css/message.css') }}" rel="stylesheet">
+   <link href="{{ asset('css/messages.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
                   <aside class="sm-side">
                       <div class="user-head">
                           <a class="inbox-avatar" href="javascript:;">
-                              <img  width="64" hieght="60" src="/img-uploads/nuj.jpg">
+                              <img  width="64" hieght="60" src="/img-uploads/{{Auth::user()->prof_pic}}">
                           </a>
                           <div class="user-name">
                               <h5><a href="#">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</a></h5>
@@ -37,7 +37,15 @@
                                               <div class="form-group">
                                                   <label class="col-lg-2 control-label">To</label>
                                                   <div class="col-lg-10">
-                                                      <input type="text" placeholder="" id="messageTo" name="messageTo" class="form-control">
+                                                      
+                                                      <select class="form-control" id="messageTo" name="messageTo">
+                                                      @forelse($users as $user)
+                                                        <option value="{{ $user->fname }}">{{ $user->fname }}</option>
+                                                      @empty
+                                                        No users
+                                                      @endforelse
+                                                      </select>
+
                                                   </div>
                                               </div>
                                               <div class="form-group">
@@ -143,7 +151,7 @@
                             
               								<tr class="clickedMessage" id="{{ $message->conversation_num }}">
               									<td class="inbox-small-cells">
-              									  <!-- <input type="checkbox" class="mail-checkbox" style="visibility: hidden;"> -->
+              									  
               									  <div><span class="glyphicon glyphicon-share-alt"></span></div>
               									</td>
               									@if(Auth::user()->id==$message->sender_id)
@@ -153,7 +161,7 @@
               									@endif
               									<td class="view-message ">{{ substr($message->content, 0, 50) }}</td>
               									<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-              									<td class="view-message  text-right">{{ $message->created_at }}</td>
+              									<td class="view-message  text-right">{{ $message->created_at->diffForHumans() }}</td>
               								</tr>
                             
               							@empty
@@ -164,5 +172,6 @@
                       </div>
                   </aside>
               </div>
+              <script src="{{ asset('js/message.js') }}"></script>
 </div>
 @endsection

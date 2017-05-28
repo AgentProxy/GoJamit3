@@ -12,7 +12,5 @@ class Genre extends Model
         return $this->belongsToMany('App\User','user_genres','genre_id','user_id');
     }
 
-    //  protected $fillable = [
-    //  'user_id','genre_id'
-    // ];
+  
 }

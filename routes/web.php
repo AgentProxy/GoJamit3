@@ -52,7 +52,10 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('/profile/follow/{username}', 'ProfileController@followUser');
 
+// Route::resource('/comments/{{post_id}}','CommentsController');
+
 	Route::get('/profile/unfollow/{username}', 'ProfileController@unfollowUser');
+
 
 	// Route::get('/profile/{username}/posts', 'PostsController@index');
 	Route::post('/create_comment/{post_id}', 'PostsController@comment');

@@ -1,20 +1,19 @@
-@extends('layouts.app')
-@section('head')
-   <link href="{{ asset('css/messages.css') }}" rel="stylesheet">
-@endsection
+<?php $__env->startSection('head'); ?>
+   <link href="<?php echo e(asset('css/messages.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
  <div class="mail-box">
                   <aside class="sm-side">
                       <div class="user-head">
                           <a class="inbox-avatar" href="javascript:;">
-                              <img  width="64" hieght="60" src="/img-uploads/{{Auth::user()->prof_pic}}">
+                              <img  width="64" hieght="60" src="/img-uploads/<?php echo e(Auth::user()->prof_pic); ?>">
                           </a>
                           <div class="user-name">
-                              <h5><a href="#">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</a></h5>
-                              <span><a href="#">{{ Auth::user()->email }}</a></span>
+                              <h5><a href="#"><?php echo e(Auth::user()->fname); ?> <?php echo e(Auth::user()->lname); ?></a></h5>
+                              <span><a href="#"><?php echo e(Auth::user()->email); ?></a></span>
                           </div>
                       </div>
                       <div class="inbox-body">
@@ -32,8 +31,9 @@
                                       <div class="modal-body">
                                           <br>
                                           <form id="form" role="form" class="form-horizontal" action="#" method="POST">
-                                              <!-- {{ method_field('post') }} -->
-                                              {{ csrf_field() }}
+                                              <!-- <?php echo e(method_field('post')); ?> -->
+                                              <?php echo e(csrf_field()); ?>
+
                                               <div class="form-group">
                                                   <label class="col-lg-2 control-label">To</label>
                                                   <div class="col-lg-10">
@@ -90,11 +90,11 @@
                   </aside>
                   <aside class="lg-side">
                       <div class="inbox-head">
-                          @if(Auth::user()->id==$one->sender_id)
-                            <h3>{{ Auth::user()->getReceiver($one->receiver_id)->fname }} {{ Auth::user()->getReceiver($one->receiver_id)->lname }}</h3>
-                          @else
-                            <h3>{{ Auth::user()->getSender($one->sender_id)->fname }} {{ Auth::user()->getSender($one->sender_id)->lname }}</h3>
-                          @endif
+                          <?php if(Auth::user()->id==$one->sender_id): ?>
+                            <h3><?php echo e(Auth::user()->getReceiver($one->receiver_id)->fname); ?> <?php echo e(Auth::user()->getReceiver($one->receiver_id)->lname); ?></h3>
+                          <?php else: ?>
+                            <h3><?php echo e(Auth::user()->getSender($one->sender_id)->fname); ?> <?php echo e(Auth::user()->getSender($one->sender_id)->lname); ?></h3>
+                          <?php endif; ?>
                           <form action="#" class="pull-right position">
                               <div class="input-append">
                                   <input type="text" class="sr-input" placeholder="Search Mail">
@@ -139,64 +139,67 @@
                             <div class="panel-body">
                               <ul class="chat">
 
-                                @forelse($conversations as $conversation)
-                                  @if(Auth::user()->id==$conversation->sender_id)
+                                <?php $__empty_1 = true; $__currentLoopData = $conversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                  <?php if(Auth::user()->id==$conversation->sender_id): ?>
 
                                       <li class="right clearfix"><span class="chat-img pull-right">
-                                          <img width=50 height=50 src="/img-uploads/{{Auth::user()->prof_pic}}" alt="User Avatar" class="img-circle" />
+                                          <img width=50 height=50 src="/img-uploads/<?php echo e(Auth::user()->prof_pic); ?>" alt="User Avatar" class="img-circle" />
                                       </span>
                                           <div class="chat-body clearfix">
                                               <div class="header">
-                                                  <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{ $conversation->created_at->diffForHumans() }}</small>
+                                                  <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo e($conversation->created_at->diffForHumans()); ?></small>
                                                   <strong class="pull-right primary-font">You</strong>
                                               </div>
                                               <p>
-                                                  {{ $conversation->content }}
+                                                  <?php echo e($conversation->content); ?>
+
                                               </p>
                                           </div>
                                       </li>
                                       <br>
                                       <br>
 
-                                  @else
+                                  <?php else: ?>
                                       
                                       <li class="left clearfix"><span class="chat-img pull-left">
-                                          <img width=50 height=50 src="/img-uploads/{{Auth::user()->prof_pic}}" alt="User Avatar" class="img-circle" />
+                                          <img width=50 height=50 src="/img-uploads/<?php echo e(Auth::user()->prof_pic); ?>" alt="User Avatar" class="img-circle" />
                                       </span>
                                           <div class="chat-body clearfix">
                                               <div class="header">
-                                                  <strong class="primary-font">{{ Auth::user()->getSender($conversation->sender_id)->fname }}</strong> <small class="pull-right text-muted">
-                                                      <span class="glyphicon glyphicon-time"></span>{{ $conversation->created_at->diffForHumans() }}</small>
+                                                  <strong class="primary-font"><?php echo e(Auth::user()->getSender($conversation->sender_id)->fname); ?></strong> <small class="pull-right text-muted">
+                                                      <span class="glyphicon glyphicon-time"></span><?php echo e($conversation->created_at->diffForHumans()); ?></small>
                                               </div>
                                               <p>
-                                                  {{ $conversation->content }}
+                                                  <?php echo e($conversation->content); ?>
+
                                               </p>
                                           </div>
                                       </li>
                                       <br>
                                       <br>
-                                  @endif
+                                  <?php endif; ?>
 
-                                @empty
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                   No conversation yet.
-                                @endforelse
+                                <?php endif; ?>
 
                               </ul>
                           </div>
                           <div class="panel-footer">
                             <form id="formConvo" name="formConvo" role="form" class="form-horizontal" action="/sendconversation" method="POST">
                                 
-                                {{ csrf_field() }}
+                                <?php echo e(csrf_field()); ?>
+
                                 <div class="input-group">
                                     <input id="btn-input" type="text" id="messageContentConvo" name="messageContentConvo" class="form-control input-sm" placeholder="Type your message here..." />
 
                                     <span class="input-group-btn">
-                                        @if(Auth::user()->id==$one->sender_id)
-                                          <input type="hidden" placeholder="" id="messageToConvo" name="messageToConvo" class="form-control" value="{{ $one->receiver_id }}"/>
-                                        @else
-                                          <input type="hidden" placeholder="" id="messageToConvo" name="messageToConvo" class="form-control" value="{{ $one->sender_id }}"/>
-                                        @endif
-                                          <input type="hidden" placeholder="" id="conversation_num" name="conversation_num" class="form-control" value="{{ $one->conversation_num }}"/>
+                                        <?php if(Auth::user()->id==$one->sender_id): ?>
+                                          <input type="hidden" placeholder="" id="messageToConvo" name="messageToConvo" class="form-control" value="<?php echo e($one->receiver_id); ?>"/>
+                                        <?php else: ?>
+                                          <input type="hidden" placeholder="" id="messageToConvo" name="messageToConvo" class="form-control" value="<?php echo e($one->sender_id); ?>"/>
+                                        <?php endif; ?>
+                                          <input type="hidden" placeholder="" id="conversation_num" name="conversation_num" class="form-control" value="<?php echo e($one->conversation_num); ?>"/>
                                           <input type="submit" class="btn btn-send pull-right" value="Send" />
                                     </span>
                                 </div>
@@ -206,6 +209,7 @@
                       </div>
                   </aside>
               </div>
-              <script src="{{ asset('js/message.js') }}"></script>
+              <script src="<?php echo e(asset('js/message.js')); ?>"></script>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -50,14 +50,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'password.regex' => 'Password must be at least 8 characters long and must contain at least a single digit',
+            'username.min' => 'Username must be at least :min',
+        ];
+
         return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed'
-            // 'birthdate'=> 'required|date|',
-            // 'fname' => 'required|string',
-            // 'lname' => 'required|string',
-            // 'age' => 'required|integer|3'
+            'username' => 'required|min:3',
+            'email' => 'required|email|max:50|unique:users',
+            'password' => 'required|min:8|confirmed|regex:/^(?=,*[A-Za-z])(?=,*\d)[A-Za-z\d]{8,}$/',
+            'fname' => 'required|max:50',
+            'lname' => 'required|max:50',
+            
         ]);
     }
 

@@ -147,41 +147,67 @@
 		                    </div>
 		                </div>
 
-		                <div class="form-group">
-		                    <label class="col-md-4 control-label">Genres Listened </label>
 
-		                    <div class="col-md-2 checkbox">
-		                       <label for="jazz"><input name="genres[]" id="jazz" type="checkbox" value="1">Jazz</label>
 
-		                        <label for="rock"><input name="genres[]" id="rock" type="checkbox" value="2">Rock</label>
+		                <div class="col-md-2 col-md-offset-2">
+		                	<h1>Genres</h1>
+		                	@forelse($genres as $genre)
+		                		<?php $c=0 ?>
+		                		@forelse($user_genres as $user_genre)
+		                			@if($genre->id===$user_genre->genre_id)
+		                				<div class="checkbox">
+		                				  <label><input type="checkbox" id="genres[{{$genre->id}}]" name="genres[{{$genre->id}}]" value="{{$genre->id}}" checked>{{ $genre->genre }}</label>
+		                				</div>
+		                				<?php $c=1 ?>
+		                			@endif
+		                		@empty
+		                			No user_genre
+		                		@endforelse
+		                		@if($c==0)
+		                			<div class="checkbox">
+		                			  <label><input type="checkbox" id="genres[{{$genre->id}}]" name="genres[{{$genre->id}}]" value="{{$genre->id}}">{{ $genre->genre }}</label>
+		                			</div>
+		                		@elseif($c==1)
+		                			@continue
+		                		@endif
+		                		
 
-		                        <label for="blues"><input name="genres[]" id="blues" type="checkbox" value="3">Blues</label>
-		                    </div>
-		                    <div class="col-md-2 checkbox">
-
-		                        <label for="folk"><input name="genres[]" id="folk" type="checkbox" value="4">Folk</label>
-
-		                        <label for="hiphop"><input name="genres[]" id="hiphop" type="checkbox" value="5">Hip Hop</label>
-		                    </div>
+		                	@empty
+		                		No genre
+		                	@endforelse
 		                </div>
 
-		                <div class="form-group">
-		                    <label class="col-md-4 control-label">Instruments Played</label>
+		                <div class="col-md-2 col-md-offset-2">
+		                	<h1>Instruments</h1>
+		                	@forelse($instruments as $instrument)
+		                		<?php $c=0 ?>
+		                		@forelse($user_instruments as $user_instrument)
+		                			@if($instrument->id===$user_instrument->instrument_id)
+		                				<div class="checkbox">
+		                				  <label><input type="checkbox" id="instruments[{{$instrument->id}}]" name="instruments[{{$instrument->id}}]" value="{{$instrument->id}}" checked>{{ $instrument->instrument }}</label>
+		                				</div>
+		                				<?php $c=1 ?>
+		                			@endif
+		                		@empty
+		                			No user_instruments
+		                		@endforelse
+		                		@if($c==0)
+		                			<div class="checkbox">
+		                			  <label><input type="checkbox" id="instruments[{{$instrument->id}}]" name="instruments[{{$instrument->id}}]" value="{{$instrument->id}}">{{ $instrument->instrument }}</label>
+		                			</div>
+		                		@elseif($c==1)
+		                			@continue
+		                		@endif
+		                		
+		                		
 
-		                    <div class="col-md-2 checkbox">
-		                       <label for="guitar"><input name="instruments[]" id="guitar" type="checkbox" value="1">Guitar</label>
-
-		                        <label for="piano"><input name="instruments[]" id="piano" type="checkbox" value="2">Piano</label>
-
-		                        <label for="Ukulele"><input name="instruments[]" id="ukulele" type="checkbox" value="3">Ukulele</label>
-		                    </div>    
-		                    <div class="col-md-2 checkbox">
-
-		                        <label for="Violin"><input name="instruments[]" id="violin" type="checkbox" value="4">Violin</label>
-
-		                        <label for="saxophone"><input name="instruments[]" id="saxophone" type="checkbox" value="5">Saxophone</label>
-		                    </div>
+		                	@empty
+		                		No intstruments
+		                	@endforelse
 		                </div>
+
+
+
 
 
 
