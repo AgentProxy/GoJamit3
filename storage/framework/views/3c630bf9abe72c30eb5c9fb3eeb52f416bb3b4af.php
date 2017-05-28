@@ -18,7 +18,7 @@
                     		</a> 
                     		<span class="notif-user-message">
 	                    		<a class="notif-user-name" href="/profile/<?php echo e($user->where('id',$notification->notifier_id)->value('username')); ?>/about">
-	                    			<?php echo e($user->where('id',$notification->notifier_id)->value('fname')." ".$user->where('id',$notification->notifier_id)->value('fname')); ?> 
+	                    			<?php echo e($user->where('id',$notification->notifier_id)->value('fname')." ".$user->where('id',$notification->notifier_id)->value('lname')); ?> 
 	                    		</a> 
 							 	<?php if($notification->type == "1"): ?>
 		                    		has followed you!
