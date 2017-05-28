@@ -150,11 +150,11 @@
                 <p>
                   <?php $__empty_2 = true; $__currentLoopData = $post->likes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $like): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
                       <div class="modal-likers-info">
-                          <a href="/profile/<?php echo e($like->liker->username); ?>/about">                              
-                              <?php if($user->prof_pic == null): ?>
+                          <a href="/profile/<?php echo e($like->liker->username); ?>/about"> 
+                              <?php if($like->liker->prof_pic == null): ?>
                               <img src="/img-uploads/maleDefault.png"/>
                               <?php else: ?>
-                              <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
+                              <img src="/img-uploads/<?php echo e($like->liker->prof_pic); ?>"/>
                               <?php endif; ?>
                           </a>
                           <div class="modal-likers-names">
@@ -163,13 +163,15 @@
 
                               </a>
                               <a class="modal-likers-username" href="/profile/<?php echo e($like->liker->username); ?>/about">
-                                  <?php echo e($like->liker->fname." ".$like->liker->lname); ?>
+                                  <?php echo e($like->liker->username); ?>
 
                               </a>
                           </div>
                       </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                      no likes yet
+                      <div class="text-center">
+                          <p>No likes yet.</p>
+                      </div>
                   <?php endif; ?>
                 </p>
               </div>
@@ -195,17 +197,38 @@
               <div class="modal-body">
                 <p>
                   <?php $__empty_2 = true; $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                      <div class="panel">
-                      <span class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
-                          <a href="/profile/<?php echo e($comment->commenter->username); ?>/about"><?php echo e($comment->commenter->username); ?></a>
-                          
+                      <div class="modal-comments-user clearfix">
+                          <div class="pull-left">
+                            <a class="modal-comments-prof-pic pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                <?php if($user->prof_pic == null): ?>
+                                <img src="/img-uploads/maleDefault.png"/>
+                                <?php else: ?>
+                                <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
+                                <?php endif; ?>
+                            </a>
+                            <div class="modal-comments-names pull-left">                            
+                              <a class="modal-comments-name pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->fname." ".$comment->commenter->lname); ?>
+
+                              </a>
+                              <a class="modal-comments-username pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->username); ?>
+
+                              </a>
+                            </div>
+                          </div>
+                          <div class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
+                      </div>
+                      <div class="modal-comments-body pull-left">
                           <p>
                               <?php echo e($comment->content); ?>
 
                           </p>
                       </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                      no comments yet
+                      <div class="text-center">
+                          No comments yet
+                      </div>
                   <?php endif; ?>
                 </p>
               </div>

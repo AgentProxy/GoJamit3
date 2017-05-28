@@ -109,7 +109,7 @@
                             <a href="/home">Home</a>
                         </li>
                         <li>
-                            <a href="/discover/<?php echo e(Auth::user()->username); ?>">Discover</a>
+                            <a href="/discover">Discover</a>
                         </li>
                     </ul>
                 </div>
@@ -136,6 +136,7 @@
                             </a>
                              <ul class="dropdown-menu" role="menu">
                                 <li><a href="/profile/<?php echo e(Auth::user()->username); ?>/about">My profile</a></li>
+                                <li><a href="/profile/<?php echo e(Auth::user()->username); ?>/posts">My posts</a></li>
                                 <li><a href="/profile/<?php echo e(Auth::user()->username); ?>/settings">Settings</a></li>
                                 <li>
                                     <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

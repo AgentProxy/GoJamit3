@@ -1,5 +1,6 @@
 <?php $__env->startSection('headabout'); ?>
 <link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(asset('css/modals.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('details'); ?>
@@ -140,70 +141,109 @@
           </div>
       </div>
       <!--  END OF MODAL -->
-      <!--Likers Modal -->
-      <div class="modal fade" id="likersModal-<?php echo e($post->id); ?>" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Likers</h4>
-            </div>
-            <div class="modal-body">
-              <p>
-                <?php $__empty_2 = true; $__currentLoopData = $post->likes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $like): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                    <div>
-                        <a href="/profile/<?php echo e($like->liker->username); ?>/about"><?php echo e($like->liker->username); ?></a>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                    no likes yet
-                <?php endif; ?>
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-  <!-- End of Modal -->
+        <!--Likers Modal -->
+        <div class="modal fade modal-likers" id="likersModal-<?php echo e($post->id); ?>" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Likers</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <?php $__empty_2 = true; $__currentLoopData = $post->likes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $like): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
+                      <div class="modal-likers-info">
+                          <a href="/profile/<?php echo e($like->liker->username); ?>/about"> 
+                              <?php if($like->liker->prof_pic == null): ?>
+                              <img src="/img-uploads/maleDefault.png"/>
+                              <?php else: ?>
+                              <img src="/img-uploads/<?php echo e($like->liker->prof_pic); ?>"/>
+                              <?php endif; ?>
+                          </a>
+                          <div class="modal-likers-names">
+                              <a class="modal-likers-name" href="/profile/<?php echo e($like->liker->username); ?>/about">
+                                  <?php echo e($like->liker->fname." ".$like->liker->lname); ?>
 
-  <!--Likers Modal -->
-      <div class="modal fade" id="commentsModal-<?php echo e($post->id); ?>" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Comments</h4>
-            </div>
-            <div class="modal-body">
-              <p>
-                <?php $__empty_2 = true; $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                    <div class="panel">
-                    <span class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
-                        <a href="/profile/<?php echo e($comment->commenter->username); ?>/about"><?php echo e($comment->commenter->username); ?></a>
-                        
-                        <p>
-                            <?php echo e($comment->content); ?>
+                              </a>
+                              <a class="modal-likers-username" href="/profile/<?php echo e($like->liker->username); ?>/about">
+                                  <?php echo e($like->liker->username); ?>
 
-                        </p>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                    no comments yet
-                <?php endif; ?>
-              </p>
+                              </a>
+                          </div>
+                      </div>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
+                      <div class="text-center">
+                          <p>No likes yet.</p>
+                      </div>
+                  <?php endif; ?>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            
           </div>
-          
         </div>
-      </div>
+    <!-- End of Modal -->
+
+    <!--Likers Modal -->
+        <div class="modal fade" id="commentsModal-<?php echo e($post->id); ?>" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Comments</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <?php $__empty_2 = true; $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
+                      <div class="modal-comments-user clearfix">
+                          <div class="pull-left">
+                            <a class="modal-comments-prof-pic pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                <?php if($user->prof_pic == null): ?>
+                                <img src="/img-uploads/maleDefault.png"/>
+                                <?php else: ?>
+                                <img src="/img-uploads/<?php echo e($user->prof_pic); ?>"/>
+                                <?php endif; ?>
+                            </a>
+                            <div class="modal-comments-names pull-left">                            
+                              <a class="modal-comments-name pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->fname." ".$comment->commenter->lname); ?>
+
+                              </a>
+                              <a class="modal-comments-username pull-left" href="/profile/<?php echo e($comment->commenter->username); ?>/about">
+                                  <?php echo e($comment->commenter->username); ?>
+
+                              </a>
+                            </div>
+                          </div>
+                          <div class="pull-right"><?php echo e($comment->created_at->diffForHumans()); ?></span>
+                      </div>
+                      <div class="modal-comments-body pull-left">
+                          <p>
+                              <?php echo e($comment->content); ?>
+
+                          </p>
+                      </div>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
+                      <div class="text-center">
+                          No comments yet
+                      </div>
+                  <?php endif; ?>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      <!-- End of Modal -->
 
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <div class="col-md-10 col-md-offset-1 ">

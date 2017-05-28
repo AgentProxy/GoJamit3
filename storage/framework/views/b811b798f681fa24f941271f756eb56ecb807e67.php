@@ -31,46 +31,15 @@ console.log("hello");
                      <?php echo e(method_field('POST')); ?>
 
                      <div class="form-group">
-                        <input id="age_slider" class="form-control" type="range" min="16" max = "100" step="1"/>
-                        <span id="age"> </span> Years Old
-                        <input id="distance_slider" class="form-control" type="range" min="0" max="100" step="1"/>
-                        <span id="distance"> </span> KM
+                        <input id="age_slider" name="age_slider" class="form-control" type="range" value="16" min="16" max = "100" step="1"/>
+                        16<span id="age"></span> Years Old
+                        <input id="distance_slider" name="distance_slider" class="form-control" type="range" value="0" min="0" max="100" step="1"/>
+                        <span id="distance">0</span> KM
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label">Sex</label>
-                        <label for="male" class="radio-inline"><input id="male" type="radio" name="sex" value="M">Male</label>
-                        <label for="female" class="radio-inline"><input id="female" type="radio" name="sex" value="F">Female</label>
-                    </div>
-                     <div class="form-group">
-                        <label class="col-md-4 control-label">Genres Listened </label>
-
-                        <div class="col-md-6 checkbox">
-                           <label for="jazz"><input name="genres[]" id="jazz" type="checkbox" value="1">Jazz</label>
-
-                            <label for="rock"><input name="genres[]" id="rock" type="checkbox" value="2">Rock</label>
-
-                            <label for="blues"><input name="genres[]" id="blues" type="checkbox" value="3">Blues</label>
-
-                            <label for="folk"><input name="genres[]" id="folk" type="checkbox" value="4">Folk</label>
-
-                            <label for="hiphop"><input name="genres[]" id="hiphop" type="checkbox" value="5">Hip Hop</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Instruments Played</label>
-
-                        <div class="col-md-6 checkbox">
-                           <label for="guitar"><input name="instruments[]" id="guitar" type="checkbox" value="1">Guitar</label>
-
-                            <label for="piano"><input name="instruments[]" id="piano" type="checkbox" value="2">Piano</label>
-
-                            <label for="Ukulele"><input name="instruments[]" id="ukulele" type="checkbox" value="3">Ukulele</label>
-
-                            <label for="Violin"><input name="instruments[]" id="violin" type="checkbox" value="4">Violin</label>
-
-                            <label for="saxophone"><input name="instruments[]" id="saxophone" type="checkbox" value="5">Saxophone</label>
-                        </div>
+                        <label for="male" class="radio-inline"><input id="male" type="radio" name="sex" value="M" required="">Male</label>
+                        <label for="female" class="radio-inline"><input id="female" type="radio" name="sex" value="F" required="">Female</label>
                     </div>
 
                         <input type="text" id="longitude" name="longitude" value="2.0" hidden/>
