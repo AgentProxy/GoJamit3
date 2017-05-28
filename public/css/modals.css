@@ -1,0 +1,40 @@
+.modal-body{
+
+}
+
+.modal-likers-info{
+	height: 80px;
+	width: 100%;
+	padding-bottom: 10px;
+}
+
+.modal-likers-info .modal-likers-names, .modal-likers-info > a{
+	float: left;
+	padding-right: 10px;
+	margin: 0;
+}
+
+.modal-likers-info a > img{
+	width: 80px;
+	height: 80px;
+}
+
+.modal-likers-name{
+	font-size: 25px;
+	font-weight: bold;
+	color: black;
+	/*width: 100%;*/
+	float: left;
+}
+
+.modal-likers-username{
+	font-size: 15px;
+	color: gray;
+	width: 100%;
+	float: left;
+}
+
+.modal-likers-info a:hover{
+	color: black;
+}
+
